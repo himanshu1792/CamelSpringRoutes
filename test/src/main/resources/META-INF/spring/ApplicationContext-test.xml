@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    
+    <routeContext id="test" xmlns="http://camel.apache.org/schema/spring">
+       
+        <route id="testRoute">
+            <from uri="restlet:/camelRoute?restletMethod=GET"/>
+            <bean ref="camelTest" method="route"/>
+            <setHeader headerName="Content-Type"> 
+         		<constant>application/json</constant> 
+			</setHeader> 
+        </route>
+        
+    </routeContext>
+    
+    <bean id="camelTest" class="camelTestoute.CamelTest"/>
+
+</beans>
